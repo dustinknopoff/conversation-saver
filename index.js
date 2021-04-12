@@ -123,6 +123,7 @@ function writeToFile(fileName, writeMsg, overflowToggle) {
   if (overflowToggle == true) {
     for (i = writeMsg.length - 1; i >= 0; i--) {
       fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
+        console.log("append err.");
         if (err) throw err;
       });
     }
