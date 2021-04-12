@@ -155,3 +155,7 @@ const app = express();
 app.listen(process.env.PORT || 5000, () => {
   wakeDyno("https://conversation-saver.herokuapp.com/"); // Use this function when only needing to wake a single Heroku app.
 });
+
+app.get("/", (req, res) => {
+  res.send("Waking up");
+});
