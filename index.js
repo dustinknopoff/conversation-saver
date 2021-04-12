@@ -90,23 +90,23 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
         if (index == 99) {
           lastMsg = message.id;
           overflowToggle = false; //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
-          msgCollection(message, lastMsg, oldestMsg, writeMsg);
+          msgCollection(message, lastMsg, oldes, writeMsg);
         }
       });
       const filename = writeToFile(message, writeMsg, overflowToggle); //  Sends the Array to be Written to a File
-      message.channel
-        .send({
-          files: [
-            {
-              attachment: filename,
-              name: filename,
-            },
-          ],
-        })
-        .then(console.log)
-        .catch(console.error);
     })
     .catch(console.error); //  Catches Promise Errors
+  message.channel
+    .send({
+      files: [
+        {
+          attachment: filename,
+          name: filename,
+        },
+      ],
+    })
+    .then(console.log)
+    .catch(console.error);
 }
 
 // Writes the Collected Chat Logs to a File [log.txt]
