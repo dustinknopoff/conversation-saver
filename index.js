@@ -98,33 +98,44 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
         if (index == 99) {
           lastMsg = message.id;
           overflowToggle = false; //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
+          console.log("Recursing");
           msgCollection(message, lastMsg, oldestMsg, writeMsg);
         }
       });
       writeToFile(fileName, writeMsg, overflowToggle); //  Sends the Array to be Written to a File
     })
     .catch(console.error); //  Catches Promise Errors
-  message.channel
-    .send({
-      files: [
-        {
-          attachment: fileName,
-          name: fileName,
-        },
-      ],
-    })
-    .then(console.log)
-    .catch(console.error);
+  if (fs.existsSync(fileName))
+    message.channel
+      .send({
+        files: [
+          {
+            attachment: fileName,
+            name: fileName,
+          },
+        ],
+      })
+      .then(console.log)
+      .catch(console.error);
 }
 
 // Writes the Collected Chat Logs to a File [log.txt]
+/**
+ *
+ * @param {string} fileName
+ * @param {string[]} writeMsg
+ * @param {boolean} overflowToggle
+ */
 function writeToFile(fileName, writeMsg, overflowToggle) {
   console.log("Block Saved!");
   if (overflowToggle == true) {
+    console.log(writeMsg[0], writeMsg.length, overflowToggle, fileName);
     for (i = writeMsg.length - 1; i >= 0; i--) {
       fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
-        console.log("append err.");
-        if (err) throw err;
+        if (err) {
+          console.log("Err");
+          throw err;
+        }
       });
     }
   }
