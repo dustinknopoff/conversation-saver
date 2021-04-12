@@ -3,7 +3,8 @@ const Discord = require("discord.js");
 const process = require("process");
 require("dotenv").config();
 const fs = require("fs");
-const http = require("http");
+const express = require("express");
+const { wakeDyno } = require("heroku-keep-awake");
 
 const client = new Discord.Client();
 
@@ -149,9 +150,8 @@ function writeToFile(fileName, writeMsg, overflowToggle) {
 // Bot Login
 client.login(token);
 
-http
-  .createServer(function (request, response) {
-    console.log("request starting for ");
-    console.log(request);
-  })
-  .listen(process.env.PORT || 5000);
+const app = express();
+
+app.listen(process.env.PORT || 5000, () => {
+  wakeDyno("https://conversation-saver.herokuapp.com/"); // Use this function when only needing to wake a single Heroku app.
+});
