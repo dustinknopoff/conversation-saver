@@ -6,15 +6,9 @@
   "dependencies": {
     "discord.js": "^12.5.3"
   },
-  "devDependencies": {
-    "parcel": "^2.0.0-beta.2"
-  },
   "scripts": {
     "start": "node index.js"
   },
   "author": "",
-  "description": "",
-  "resolutions": {
-    "@babel/preset-env": "7.13.12"
-  }
+  "description": ""
 }
