@@ -10,7 +10,7 @@
     "parcel": "^2.0.0-beta.2"
   },
   "scripts": {
-    "run": "parcel serve index.js"
+    "start": "node index.js"
   },
   "author": "",
   "description": "",
