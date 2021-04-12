@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const process = require("process");
 require("dotenv").config();
 const fs = require("fs");
+const http = require("http");
 
 const client = new Discord.Client();
 
@@ -122,3 +123,10 @@ function writeToFile(message, writeMsg, overflowToggle) {
 
 // Bot Login
 client.login(token);
+
+http
+  .createServer(function (request, response) {
+    console.log("request starting for ");
+    console.log(request);
+  })
+  .listen(process.env.PORT || 5000);
