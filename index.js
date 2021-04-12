@@ -91,7 +91,7 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
         if (index == 99) {
           lastMsg = message.id;
           overflowToggle = false; //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
-          msgCollection(message, lastMsg, oldes, writeMsg);
+          msgCollection(message, lastMsg, oldestMsg, writeMsg);
         }
       });
       writeToFile(fileName, writeMsg, overflowToggle); //  Sends the Array to be Written to a File
