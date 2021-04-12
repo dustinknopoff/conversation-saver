@@ -1,0 +1,20 @@
+{
+  "name": "conversation-saver",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.2"
+  },
+  "scripts": {
+    "run": "parcel serve index.js"
+  },
+  "author": "",
+  "description": "",
+  "resolutions": {
+    "@babel/preset-env": "7.13.12"
+  }
+}
