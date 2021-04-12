@@ -1,12 +1,13 @@
 // Import the discord.js module
 const Discord = require("discord.js");
-const config = require("./config.json");
+const process = require("process");
+require("dotenv").config();
 const fs = require("fs");
 
 const client = new Discord.Client();
 
-const token = config.token;
-const prefix = config.prefix;
+const token = process.env.BOT_TOKEN;
+const prefix = process.env.PREFIX;
 
 // Ready
 client.on("ready", () => {

@@ -188,3 +188,4 @@ tags
 config.json
 .env
 *.txt
+.envrc
