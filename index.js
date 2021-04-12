@@ -35,7 +35,7 @@ client.on("message", async (message) => {
 
         break;
 
-      case "cshelp":
+      case "help":
         message.channel.send({
           embed: {
             color: 3447003,
@@ -64,7 +64,7 @@ client.on("message", async (message) => {
 
       default:
         message.channel.send(
-          "I'm sorry, I didn't understand that command. Try !help."
+          `I'm sorry, I didn't understand that command. Try ${prefix}help.`
         );
     }
   }
