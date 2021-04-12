@@ -74,7 +74,8 @@ client.on("message", async (message) => {
 //  Collects All of a Text Channels Chat Logs
 async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
   let overflowToggle = true;
-
+  let d = new Date();
+  let fileName = message.channel.name + "-" + d.getTime().toString() + ".txt";
   //  Works Reverse Chronologically:  It Grabs Recent Messages First and Works Backwards.
   await message.channel.messages
     .fetch({ limit: 100, before: mostRecentMsg, after: oldestMsg })
@@ -93,15 +94,15 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
           msgCollection(message, lastMsg, oldes, writeMsg);
         }
       });
-      const filename = writeToFile(message, writeMsg, overflowToggle); //  Sends the Array to be Written to a File
+      writeToFile(fileName, writeMsg, overflowToggle); //  Sends the Array to be Written to a File
     })
     .catch(console.error); //  Catches Promise Errors
   message.channel
     .send({
       files: [
         {
-          attachment: filename,
-          name: filename,
+          attachment: fileName,
+          name: fileName,
         },
       ],
     })
@@ -110,9 +111,7 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
 }
 
 // Writes the Collected Chat Logs to a File [log.txt]
-function writeToFile(message, writeMsg, overflowToggle) {
-  let d = new Date();
-  let fileName = message.channel.name + "-" + d.getTime().toString() + ".txt";
+function writeToFile(fileName, writeMsg, overflowToggle) {
   console.log("Block Saved!");
   if (overflowToggle == true) {
     for (i = writeMsg.length - 1; i >= 0; i--) {
@@ -121,7 +120,6 @@ function writeToFile(message, writeMsg, overflowToggle) {
       });
     }
   }
-  return fileName;
 }
 
 // Bot Login
