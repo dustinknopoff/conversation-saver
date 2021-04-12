@@ -89,14 +89,15 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
     .then((messages) => {
       console.log("Got an array!");
       const arr = messages.array();
-      arr.forEach((message) => {
+      arr.forEach((message, index) => {
         //  Funnels the last 100 Messages into an Array
+        console.log(message.id);
         writeMsg.push(
           `${message.author.username.toString()}: ${message.content}`
         ); //  Writes the Message Author and Content to an Array
 
         //  Checks if a Text Channel has more than 100 Messages and Recursively Readies the Second Block of 100 Messages
-        if (arr.length < 100) {
+        if (arr[arr.length - 1].id != oldestMsg && index == 99) {
           lastMsg = message.id;
           overflowToggle = false; //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
           console.log("Recursing");
