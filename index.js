@@ -83,6 +83,7 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
   let overflowToggle = true;
   let d = new Date();
   let fileName = message.channel.name + "-" + d.getTime().toString() + ".txt";
+  console.log("will output to", fileName);
   //  Works Reverse Chronologically:  It Grabs Recent Messages First and Works Backwards.
   await message.channel.messages
     .fetch({ limit: 100, before: mostRecentMsg, after: oldestMsg })
@@ -91,7 +92,6 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
       const arr = messages.array();
       arr.forEach((message, index) => {
         //  Funnels the last 100 Messages into an Array
-        console.log(message.id);
         writeMsg.push(
           `${message.author.username.toString()}: ${message.content}`
         ); //  Writes the Message Author and Content to an Array
@@ -100,7 +100,7 @@ async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
         if (arr[arr.length - 1].id != oldestMsg && index == 99) {
           lastMsg = message.id;
           overflowToggle = false; //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
-          console.log("Recursing");
+          console.log("Recursing", lastMsg);
           msgCollection(message, lastMsg, oldestMsg, writeMsg);
         }
       });
