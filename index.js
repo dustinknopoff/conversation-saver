@@ -31,7 +31,7 @@ client.on("message", async (message) => {
 
         break;
 
-      case "help":
+      case "chelp":
         message.channel.send({
           embed: {
             color: 3447003,
