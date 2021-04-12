@@ -21,7 +21,10 @@ client.on("message", async (message) => {
   if (message.author.bot) return;
 
   if (message.content[0] == prefix && message.content[1]) {
-    let userCommand = message.content.toString().substring(1).split(" "); // Removes the prefix ('!') and splits the command away from the arguments
+    let userCommand = message.content
+      .toString()
+      .substring(prefix.length)
+      .split(" "); // Removes the prefix ('!') and splits the command away from the arguments
 
     switch (userCommand[0]) {
       case "save": //  Save Chat Logs for a Text Channel
@@ -32,7 +35,7 @@ client.on("message", async (message) => {
 
         break;
 
-      case "chelp":
+      case "help":
         message.channel.send({
           embed: {
             color: 3447003,
