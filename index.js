@@ -48,8 +48,9 @@ client.on("message", async (message) => {
               "Here's a quick summary of Conversation Saver's Commands.  \n",
             fields: [
               {
-                name: "!save <newest message ID> <oldest message ID>",
-                value: "Allows you to save the entire Text Channel Chat Log.",
+                name: "!save <NEWEST message ID> <OLDEST message ID>",
+                value:
+                  "Allows you to save the entire chat log between the two message IDs. To retrieve message IDs, hold (or click '...' menu) message and select 'Copy ID'.",
               },
             ],
             timestamp: new Date(),
@@ -71,7 +72,13 @@ client.on("message", async (message) => {
 
 // =-=-=-=-=-=  Functions for User Commands  =-=-=-=-=-=-=
 
-//  Collects All of a Text Channels Chat Logs
+/**
+ *
+ * @param {Message} message
+ * @param {number} mostRecentMsg
+ * @param {number} oldestMsg
+ * @param {string[]} writeMsg
+ */
 async function msgCollection(message, mostRecentMsg, oldestMsg, writeMsg) {
   let overflowToggle = true;
   let d = new Date();
